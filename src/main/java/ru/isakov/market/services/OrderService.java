@@ -2,6 +2,7 @@ package ru.isakov.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.isakov.market.models.dtos.OrderDetailsDto;
 import ru.isakov.market.models.entities.Order;
 import ru.isakov.market.models.entities.OrderItem;
 import ru.isakov.market.models.entities.User;
@@ -20,7 +21,7 @@ public class OrderService {
         return orderRepository.findAllByUser(user);
     }
 
-    public Order createOrderForCurrentUser(User user) {
+    public Order createOrderForCurrentUser(User user, OrderDetailsDto orderDetailsDto) {
         Order order = new Order();
         order.setUser(user);
         order.setPrice(cart.getSum());
@@ -29,6 +30,8 @@ public class OrderService {
         for (OrderItem oi : cart.getItems()) {
             oi.setOrder(order);
         }
+        order.setPhone(orderDetailsDto.getPhone());
+        order.setAddress(orderDetailsDto.getDeliveryAddress().toString());
         order = orderRepository.save(order);
         cart.clear();
         return order;

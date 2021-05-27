@@ -34,6 +34,7 @@ angular.module('app').controller('productsController', function ($scope, $http, 
     };
 
     $scope.addToCart = function (productId) {
+        console.log(productId);
         $http({
             url: contextPath + '/api/v1/cart/add/' + productId,
             method: 'GET'

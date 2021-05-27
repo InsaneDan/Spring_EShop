@@ -30,7 +30,11 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
     $scope.createOrder = function () {
         $http({
             url: contextPath + '/api/v1/orders',
-            method: 'POST'
+            method: 'POST',
+            params: {
+                phone: $scope.orderDetails.phone,
+                deliveryAddress: { address: $scope.orderDetails.address }
+            }
         }).then(function (response) {
             $scope.showMyOrders();
             $scope.loadCart();
