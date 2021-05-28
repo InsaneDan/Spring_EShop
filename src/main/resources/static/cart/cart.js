@@ -19,26 +19,34 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
         });
     };
 
+    $scope.addToCart = function (productId) {
+        $http({
+            url: contextPath + '/api/v1/cart/add/' + productId,
+            method: 'GET'
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+    $scope.createOrder = function () {
+        $http({
+            url: contextPath + '/api/v1/orders',
+            method: 'POST',
+            data: {
+                "phone": $scope.orderDetails.phone,
+                "deliveryAddress": { "address": $scope.orderDetails.address }
+            }
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    };
+
     $scope.isUserLoggedIn = function () {
         if ($localStorage.aprilMarketCurrentUser) {
             return true;
         } else {
             return false;
         }
-    };
-
-    $scope.createOrder = function () {
-        $http({
-            url: contextPath + '/api/v1/orders',
-            method: 'POST',
-            params: {
-                phone: $scope.orderDetails.phone,
-                deliveryAddress: { address: $scope.orderDetails.address }
-            }
-        }).then(function (response) {
-            $scope.showMyOrders();
-            $scope.loadCart();
-        });
     };
 
     $scope.loadCart();

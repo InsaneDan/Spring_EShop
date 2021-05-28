@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="oi in cartDto.items">
-        <td>{{oi.productTitle}} ({{oi.productId}})</td>
+        <td>{{oi.productTitle}}</td>
         <td>
             {{oi.quantity}}
             <button class="btn btn-primary" ng-click="addToCart(oi.productId)">+</button>
@@ -25,7 +25,7 @@
     </tbody>
 </table>
 <span ng-if="cartDto.items.length == 0">Ваша корзина пуста</span>
-<button ng-click="clearCart()" class="btn btn-primary" ng-show="cartDto.items.length > 0">Очистить корзину</button>
+<button ng-click="clearCart()" class="btn btn-primary" ng-if="cartDto.items.length > 0">Очистить корзину</button>
 
 <div ng-show="(cartDto.items.length > 0) && isUserLoggedIn()">
     <p></p>
@@ -33,23 +33,21 @@
 
     <form name="orderDetails" class="align-middle" ng-submit="createOrder()">
         <div class="input-group-prepend">
-            <input type="text" id="orderPhoneField"
+            <input type="text"
                    ng-required="true"
-                   ng-model="phone"
+                   ng-model="orderDetails.phone"
                    class="form-control"
                    style="margin-left: 10px;"
                    aria-describedby="inputGroup-sizing-sm"
                    aria-label="Phone"
                    placeholder="номер телефона">
-            <span>{{phone}}</span>
-            <input type="text" id="orderAddressField"
+            <input type="text"
                    ng-required="true"
-                   ng-model="address"
+                   ng-model="orderDetails.address"
                    class="form-control"
                    style="margin-left: 10px;"
                    aria-describedby="inputGroup-sizing-sm"
                    placeholder="адрес доставки">
-            <span>{{address}}</span>
 
             <button type="submit"
                     class="btn btn-primary"

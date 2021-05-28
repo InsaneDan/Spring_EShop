@@ -1,14 +1,6 @@
 angular.module('app').controller('productsController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
-    $scope.isUserLoggedIn = function () {
-        if ($localStorage.aprilMarketCurrentUser) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
     $scope.loadPage = function (page) {
         $http({
             url: contextPath + '/api/v1/products',
@@ -33,8 +25,16 @@ angular.module('app').controller('productsController', function ($scope, $http, 
         });
     };
 
+    $scope.loadCart = function (page) {
+        $http({
+            url: contextPath + '/api/v1/cart',
+            method: 'GET'
+        }).then(function (response) {
+            $scope.cartDto = response.data;
+        });
+    };
+
     $scope.addToCart = function (productId) {
-        console.log(productId);
         $http({
             url: contextPath + '/api/v1/cart/add/' + productId,
             method: 'GET'
@@ -49,19 +49,6 @@ angular.module('app').controller('productsController', function ($scope, $http, 
             arr.push(i);
         }
         return arr;
-    }
-
-    $scope.showMyOrders = function () {
-        $http({
-            url: contextPath + '/api/v1/orders',
-            method: 'GET'
-        }).then(function (response) {
-            $scope.myOrders = response.data;
-        });
-    };
-
-    if ($scope.isUserLoggedIn()) {
-        $scope.showMyOrders();
     }
 
     $scope.loadPage(1);
