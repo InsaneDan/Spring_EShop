@@ -5,17 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.isakov.market.models.dtos.CartDto;
 import ru.isakov.market.models.components.Cart;
+import ru.isakov.market.services.CartService;
 
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
 @Slf4j
 public class CartController {
+    private final CartService cartService;
     private final Cart cart;
 
     @GetMapping("/add/{productId}")
     public void addToCart(@PathVariable(name = "productId") Long id) {
-        cart.addToCart(id);
+        cartService.addToCartService(id);
     }
 
     @GetMapping("/clear")
