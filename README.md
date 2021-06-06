@@ -20,3 +20,15 @@
 
 2. *Вынести список заказов пользователя на отдельную страницу
 </details>
+
+<details>
+<summary>Урок 3. Spring Expression Language. AOP</summary>
+
+1. Сделать из корзины сессионный бин
+</details>
+
+<details>
+<summary>Урок 4. Веб-инструментарий Spring Framework (SOAP)</summary>
+
+1. Добавить к магазину возможность выгрузки всех товаров, и отдельных товаров по id через SOAP сервис
+</details>
