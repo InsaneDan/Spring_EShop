@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.isakov.market.models.entities.Product;
 import ru.isakov.market.models.repositories.ProductRepository;
-import ru.isakov.market.soap.products.ProductWs;
+import ru.isakov.market.soap.entitiesWs.productsWs.ProductWs;
 
 import java.util.List;
 import java.util.function.Function;

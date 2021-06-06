@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("ProductsPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://ru.isakov.market/spring/market/ws/products");
+        wsdl11Definition.setTargetNamespace("http://ru.isakov.market/spring/market/ws/productsWs");
         wsdl11Definition.setSchema(productsSchema);
         return wsdl11Definition;
     }
@@ -38,4 +38,23 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     public XsdSchema productsSchema() {
         return new SimpleXsdSchema(new ClassPathResource("xsds/products.xsd"));
     }
+
+    // http://localhost:8080/ws/categories.wsdl
+    @Bean(name = "categories")
+    public DefaultWsdl11Definition groupsWsdl11Definition(XsdSchema categoriesSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("CategoriesPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://ru.isakov.market/spring/market/ws/categoriesWs");
+        wsdl11Definition.setSchema(categoriesSchema);
+        return wsdl11Definition;
+    }
+
+    @Bean
+    public XsdSchema categoriesSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("xsds/categories.xsd"));
+    }
+
+
+
 }
