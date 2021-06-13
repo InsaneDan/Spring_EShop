@@ -27,8 +27,33 @@
 <span ng-if="cartDto.items.length == 0">Ваша корзина пуста</span>
 <button ng-click="clearCart()" class="btn btn-primary" ng-if="cartDto.items.length > 0">Очистить корзину</button>
 
-<div ng-show="isUserLoggedIn()">
+<div ng-show="(cartDto.items.length > 0) && isUserLoggedIn()">
     <p></p>
     <h4>Оформление заказа</h4>
-    <button ng-click="createOrder()" class="btn btn-primary" ng-show="cartDto.items.length > 0">Оформить заказ</button>
+
+    <form name="orderDetails" class="align-middle" ng-submit="createOrder()">
+        <div class="input-group-prepend">
+            <input type="text"
+                   ng-required="true"
+                   ng-model="orderDetails.phone"
+                   class="form-control"
+                   style="margin-left: 10px;"
+                   aria-describedby="inputGroup-sizing-sm"
+                   aria-label="Phone"
+                   placeholder="номер телефона">
+            <input type="text"
+                   ng-required="true"
+                   ng-model="orderDetails.address"
+                   class="form-control"
+                   style="margin-left: 10px;"
+                   aria-describedby="inputGroup-sizing-sm"
+                   placeholder="адрес доставки">
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    style="margin-left: 10px;">
+                Оформить заказ
+            </button>
+        </div>
+    </form>
 </div>
