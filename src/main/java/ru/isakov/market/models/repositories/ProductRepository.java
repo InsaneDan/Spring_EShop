@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import ru.isakov.market.models.entities.Product;
 
+import java.util.Optional;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
     Page<Product> findAllBy(Pageable pageable);
 
-//    @Query(value = "select count (*) from products", nativeQuery = true)
-//    Long nativeCount();
+    @Query("select p from Product p where p.title = ?1")
+    Optional<Product> findByTitle(String title);
+
 }
