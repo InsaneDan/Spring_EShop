@@ -3,6 +3,7 @@ package ru.isakov.market.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import ru.isakov.market.models.dtos.NewUserDto;
 import ru.isakov.market.models.dtos.UserDto;
 import ru.isakov.market.error_handling.ResourceNotFoundException;
 import ru.isakov.market.models.entities.User;
@@ -15,7 +16,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/me")
     public UserDto getCurrentUsername(Principal principal) {
@@ -23,8 +23,8 @@ public class UserController {
         return new UserDto(currentUser.getUsername(), currentUser.getEmail());
     }
 
-    @PostMapping("/register") // todo заменить при решении домашнего задания
-    public void register(@RequestBody UserDto userDto) {
-        userDto.setEmail(passwordEncoder.encode(userDto.getEmail())); // encode email to bcrypt
-    }
+//    @PostMapping("/register")
+//    public void register(@RequestBody NewUserDto newUserDto) {
+//        userService.registerUser(newUserDto);
+//    }
 }
