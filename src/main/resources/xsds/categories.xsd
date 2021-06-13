@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:pns="http://ru.isakov.market/spring/market/ws/productsWs"
+        xmlns:cns="http://ru.isakov.market/spring/market/ws/categoriesWs"
+        targetNamespace="http://ru.isakov.market/spring/market/ws/categoriesWs" elementFormDefault="qualified">
+
+    <xs:import schemaLocation="products.xsd" namespace="http://ru.isakov.market/spring/market/ws/productsWs"/>
+
+    <xs:element name="getCategoryByTitleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCategoryByTitleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="category" type="cns:categoryWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="categoryWs">
+        <xs:sequence>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="products" maxOccurs="unbounded" type="pns:productWs"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

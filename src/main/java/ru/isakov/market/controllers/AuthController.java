@@ -36,8 +36,5 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @GetMapping("/api/auth_demo") // todo remove this demo code
-    public String securedDemo() {
-        return "Secured";
-    }
+
 }
