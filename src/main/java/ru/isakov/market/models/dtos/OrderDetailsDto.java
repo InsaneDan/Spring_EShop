@@ -12,4 +12,5 @@ public class OrderDetailsDto {
     private String phone;
 
     private DeliveryAddressDto deliveryAddress;
+
 }

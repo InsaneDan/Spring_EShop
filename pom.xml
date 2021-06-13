@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>ru.isakov.market</groupId>
-	<artifactId>sprng-market</artifactId>
+	<artifactId>spring-market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-market</name>
 	<description>Spring Market: Spring Boot + JS</description>
