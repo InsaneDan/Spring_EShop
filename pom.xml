@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>ru.isakov.market</groupId>
-	<artifactId>sprng-market</artifactId>
+	<artifactId>spring-market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sprng-market</name>
+	<name>spring-market</name>
 	<description>Spring Market: Spring Boot + JS</description>
 	<properties>
 		<java.version>11</java.version>
@@ -28,6 +28,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
 		<dependency>
@@ -71,6 +75,16 @@
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 			<version>1.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
