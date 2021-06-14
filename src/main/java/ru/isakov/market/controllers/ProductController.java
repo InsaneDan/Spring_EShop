@@ -4,6 +4,7 @@ package ru.isakov.market.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +13,7 @@ import ru.isakov.market.models.dtos.ProductDto;
 import ru.isakov.market.error_handling.InvalidDataException;
 import ru.isakov.market.error_handling.ResourceNotFoundException;
 import ru.isakov.market.models.entities.Product;
+import ru.isakov.market.models.repositories.specifications.ProductSpecifications;
 import ru.isakov.market.services.ProductService;
 
 import java.util.stream.Collectors;
@@ -30,10 +32,10 @@ public class ProductController {
 //    }
 
     @GetMapping
-    public Page<ProductDto> getAllProducts(@RequestParam(name = "p", defaultValue = "1") int page) {
-        Page<Product> productsPage = productService.findPage(page - 1, 10);
-        Page<ProductDto> dtoPage = new PageImpl<>(productsPage.getContent().stream().map(ProductDto::new).collect(Collectors.toList()), productsPage.getPageable(), productsPage.getTotalElements());
-        return dtoPage;
+    public Page<ProductDto> getAllProducts(@RequestParam MultiValueMap<String, String> params,
+                                           @RequestParam(name = "p", defaultValue = "1") int page) {
+        if (page < 1) page = 1;
+        return productService.findAll(ProductSpecifications.build(params), page, 10);
     }
 
     @GetMapping("/{id}")
