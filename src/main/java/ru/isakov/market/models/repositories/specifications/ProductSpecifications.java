@@ -4,6 +4,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.MultiValueMap;
 import ru.isakov.market.models.entities.Product;
 
+import java.util.Locale;
+
 public class ProductSpecifications {
     private static Specification<Product> priceGreaterOrEqualsThan(int minPrice) {
         return (root, criteriaQuery, criteriaBuilder) ->
@@ -17,7 +19,7 @@ public class ProductSpecifications {
 
     private static Specification<Product> titleLike(String titlePart) {
         return (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.like(root.get("title"), String.format("%%%s%%", titlePart));
+                criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), String.format("%%%s%%", titlePart.toLowerCase(Locale.ROOT)));
     }
 
     public static Specification<Product> build(MultiValueMap<String, String> params) {
