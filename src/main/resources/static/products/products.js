@@ -1,6 +1,14 @@
 angular.module('app').controller('productsController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189/market';
 
+    $scope.generatePagesIndexes = function (startPage, endPage) {
+        let arr = [];
+        for (let i = startPage; i < endPage + 1; i++) {
+            arr.push(i);
+        }
+        return arr;
+    }
+
     $scope.loadPage = function (page) {
         $http({
             url: contextPath + '/api/v1/products',
@@ -13,6 +21,8 @@ angular.module('app').controller('productsController', function ($scope, $http, 
             }
         }).then(function (response) {
             $scope.productsPage = response.data;
+
+            if (page == null) { page = 0; }
 
             let minPageIndex = page - 2;
             if (minPageIndex < 1) {
@@ -46,12 +56,9 @@ angular.module('app').controller('productsController', function ($scope, $http, 
         });
     }
 
-    $scope.generatePagesIndexes = function (startPage, endPage) {
-        let arr = [];
-        for (let i = startPage; i < endPage + 1; i++) {
-            arr.push(i);
-        }
-        return arr;
+    $scope.clearFilter = function () {
+        $scope.filter = {};
+        $scope.loadPage(1);
     }
 
     $scope.loadPage(1);
